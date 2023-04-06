@@ -1,1 +1,3 @@
 This file is a test for comitting between GitHub.com and GitHub Desktop
+
+It worked now I'm going to edit and branch it on GitHub.com and push/commit on GitHub Desktop
