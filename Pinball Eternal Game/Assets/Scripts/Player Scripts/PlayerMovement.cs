@@ -41,11 +41,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetButtonDown("Sprint"))
             {
-                direction = new Vector3(Input.GetAxisRaw("Horizontal") + Time.deltaTime + playerRun, 0, Input.GetAxisRaw("Vertical") + Time.deltaTime + playerRun);
+                direction = new Vector3(Input.GetAxisRaw("Horizontal") * Time.deltaTime * playerRun, 0, Input.GetAxisRaw("Vertical") * Time.deltaTime * playerRun);
             }
             else //walk speed
             {
-                direction = new Vector3(Input.GetAxisRaw("Horizontal") + Time.deltaTime + playerWalk, 0, Input.GetAxisRaw("Vertical") + Time.deltaTime + playerWalk);
+                direction = new Vector3(Input.GetAxisRaw("Horizontal") * Time.deltaTime * playerWalk, 0, Input.GetAxisRaw("Vertical") * Time.deltaTime * playerWalk);
             }
             if (Input.GetButtonDown("Jump"))
             {
