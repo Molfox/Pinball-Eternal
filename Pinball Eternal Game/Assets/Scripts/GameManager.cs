@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] bool cursorLocked = true;
+    [SerializeField] float score;
 
     // Start is called before the first frame update
     void Start()
@@ -20,5 +21,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void changeScore(float addScore)
+    {
+
     }
 }

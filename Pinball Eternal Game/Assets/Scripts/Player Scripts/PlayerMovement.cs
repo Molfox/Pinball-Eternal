@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] float gravityValue = -9.8f;
 
+    [SerializeField] bool sprint = false;
     
 
     // Start is called before the first frame update
@@ -37,24 +38,37 @@ public class PlayerMovement : MonoBehaviour
 
     void GetInput()
     {
+        float speed = playerWalk;
+        if (Input.GetButton("Sprint"))
+        {
+            speed = playerRun;
+            sprint = true;
+        }
+        else
+            sprint = false;
+
+        float x = Input.GetAxisRaw("Horizontal") * speed;
+        float z = Input.GetAxisRaw("Vertical") * speed;
+
         if (cc.isGrounded)
         {
-            if (Input.GetButtonDown("Sprint"))
+            if (direction.y < 0)
             {
-                direction = new Vector3(Input.GetAxisRaw("Horizontal") * Time.deltaTime * playerRun, 0, Input.GetAxisRaw("Vertical") * Time.deltaTime * playerRun);
+                direction.y = -1f;
             }
-            else //walk speed
-            {
-                direction = new Vector3(Input.GetAxisRaw("Horizontal") * Time.deltaTime * playerWalk, 0, Input.GetAxisRaw("Vertical") * Time.deltaTime * playerWalk);
-            }
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButton("Jump"))
             {
                 direction.y += Mathf.Sqrt(gravityValue * -3f * jumpHeight);
             }
         } else
+        {
             direction.y += gravityValue * Time.deltaTime;
+        }
 
-        cc.Move(direction);
+        Vector3 move = transform.right * x + transform.forward * z + direction;
+
+        cc.Move(move * Time.deltaTime);
+        
 
     }
 

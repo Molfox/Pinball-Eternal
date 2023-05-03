@@ -6,8 +6,8 @@ public class PlayerRotate : MonoBehaviour
 {
     [SerializeField] Transform playerCameraLink;
     [SerializeField] Transform playerBodyLink;
-    [SerializeField] float xSensitivity;
-    [SerializeField] float ySensitivity;
+    [SerializeField] float xSensitivity = 100f;
+    [SerializeField] float ySensitivity = 100f;
     float xRotate;
     float yRotate;
 
@@ -25,15 +25,13 @@ public class PlayerRotate : MonoBehaviour
 
     void MouseRotationUpdate()
     {
-        Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X") * xSensitivity * Time.deltaTime,
-                                        Input.GetAxisRaw("Mouse Y") * ySensitivity * Time.deltaTime);
+        Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X") * xSensitivity,
+                                        Input.GetAxisRaw("Mouse Y") * ySensitivity);
 
-        yRotate += mouseDelta.x;
         xRotate -= mouseDelta.y;
         xRotate = Mathf.Clamp(xRotate, -90.0f, 90.0f);
 
-        transform.rotation = Quaternion.Euler(xRotate, yRotate, 0);
-        playerBodyLink.rotation = Quaternion.Euler(0, yRotate, 0);
-        playerCameraLink.rotation = transform.rotation;
+        transform.localRotation = Quaternion.Euler(xRotate, 0, 0);
+        playerBodyLink.Rotate(Vector3.up * mouseDelta.x);
     }
 }
