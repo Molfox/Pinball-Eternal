@@ -19,8 +19,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpHeight = 3f;
 
     [SerializeField] float gravityValue = -9.8f;
-
-    [SerializeField] bool sprint = false;
     
 
     // Start is called before the first frame update
@@ -33,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         GetInput();
-        Movement();
     }
 
     void GetInput()
@@ -42,10 +39,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButton("Sprint"))
         {
             speed = playerRun;
-            sprint = true;
         }
-        else
-            sprint = false;
 
         float x = Input.GetAxisRaw("Horizontal") * speed;
         float z = Input.GetAxisRaw("Vertical") * speed;
@@ -69,11 +63,6 @@ public class PlayerMovement : MonoBehaviour
 
         cc.Move(move * Time.deltaTime);
         
-
-    }
-
-    void Movement()
-    {
 
     }
 }

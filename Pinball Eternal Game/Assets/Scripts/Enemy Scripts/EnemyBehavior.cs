@@ -19,8 +19,14 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] int enemyDamage = 1;
     [Tooltip("How far can this enemy see")]
     [SerializeField] float sightRange = 10f;
+    [Tooltip("How far will it try to attack")]
+    [SerializeField] float attackRange = 1f;
+    [Tooltip("How far the player needs to be to escape aggro")]
+    [SerializeField] float escapeRange = 15f;
 
     GameObject playerBeingChased;
+
+    GameManager gm;
 
     bool alive = true;
     bool knockback = false;
@@ -39,6 +45,7 @@ public class EnemyBehavior : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        gm = FindObjectOfType<GameManager>();
         stage = 1;
     }
 
@@ -57,6 +64,7 @@ public class EnemyBehavior : MonoBehaviour
                 KBCheck();
                 break;
             case 4: // Player Chase
+                PlayerChase();
                 break;
             case 5: // Death
                 break;
@@ -101,10 +109,17 @@ public class EnemyBehavior : MonoBehaviour
     private void PlayerChase()
     {
         float distance = Vector3.Distance(transform.position, playerBeingChased.transform.position);
-        switch (distance)
+        if (distance < attackRange)
         {
-            default:
-                break;
+            Attack();
+        } else if (distance > escapeRange)
+        {
+            stage = 1;
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, playerBeingChased.transform.position,
+                enemySpeed * Time.deltaTime);
         }
     }
 
@@ -140,12 +155,12 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Attack()
     {
-        //This will activate an attack trigger
+        Debug.Log("Attack");
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("killBox") || other.CompareTag("deathFloor"))
+        if (other.CompareTag("killBox") || other.CompareTag("deathFloor") || (other.CompareTag("enemy") && knockback))
         {
             alive = false;
             gameObject.GetComponent<BoxCollider>().enabled = false;
