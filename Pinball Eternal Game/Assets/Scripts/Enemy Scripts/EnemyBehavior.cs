@@ -20,6 +20,7 @@ public class EnemyBehavior : MonoBehaviour
 
     bool alive = true;
     bool knockback = false;
+    Rigidbody rb;
 
     [Tooltip("This enemies parent object")]
     [SerializeField] GameObject parent;
@@ -27,7 +28,7 @@ public class EnemyBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -40,6 +41,14 @@ public class EnemyBehavior : MonoBehaviour
         }
         else
         {
+            if (knockback && alive)
+            {
+                if (rb.velocity == new Vector3 (0,0,0))
+                {
+                    knockback = false;
+                    mWait = false;
+                }
+            }
             if (!mWait && alive && !knockback)
             {
                 mWait = true;
@@ -56,20 +65,18 @@ public class EnemyBehavior : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTimeMove);
         if (currentPointIndex + 1 < patrolPoints.Length)
-        {
             currentPointIndex++;
-            mWait = false;
-        } else
-        {
+        else
             currentPointIndex = 0;
-            mWait = false;
-        }
+        mWait = false;
     }
 
-    public void Knockback()
+    public void Knockback(float force, Vector3 tf)
     {
+        StopAllCoroutines();
         knockback = true;
-
+        Vector3 direction = tf - transform.position;
+        rb.AddForce(direction.normalized * force, ForceMode.Impulse);
     }
 
     private void attack()

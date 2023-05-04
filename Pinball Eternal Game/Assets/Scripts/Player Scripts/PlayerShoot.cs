@@ -6,6 +6,8 @@ public class PlayerShoot : MonoBehaviour
 {
     bool isFireCD = false;
     [SerializeField] float fireCooldown = 1f;
+    [SerializeField] float range = 10f;
+    [SerializeField] float force = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +18,7 @@ public class PlayerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && !isFireCD)
+        if (Input.GetButton("Fire1") && !isFireCD)
         {
             Fire();
         }
@@ -24,7 +26,13 @@ public class PlayerShoot : MonoBehaviour
 
     void Fire()
     {
-        //shoots a raycast, checking to see if it's an enemy and within range, then activates the appropriate
-        //knockback script
+        RaycastHit hit;
+        if(Physics.Raycast(this.transform.position,this.transform.forward, out hit, range))
+        {
+            if(hit.collider.CompareTag("enemy") && hit.transform.GetComponent<EnemyBehavior>() != null)
+            {
+                hit.transform.GetComponent<EnemyBehavior>().Knockback(force, transform.position);
+            }
+        }
     }
 }
