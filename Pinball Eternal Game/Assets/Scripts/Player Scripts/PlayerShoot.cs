@@ -6,8 +6,8 @@ public class PlayerShoot : MonoBehaviour
 {
     bool isFireCD = false;
     [SerializeField] float fireCooldown = 1f;
-    [SerializeField] float range = 10f;
-    [SerializeField] float force = 10f;
+    [SerializeField] float range = 5f;
+    [SerializeField] float force = 1000f;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +20,10 @@ public class PlayerShoot : MonoBehaviour
     {
         if (Input.GetButton("Fire1") && !isFireCD)
         {
+
             Fire();
+            isFireCD = true;
+            StartCoroutine(FireWait());
         }
     }
 
@@ -29,10 +32,19 @@ public class PlayerShoot : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(this.transform.position,this.transform.forward, out hit, range))
         {
+            Debug.Log("Ray Out");
             if(hit.collider.CompareTag("enemy") && hit.transform.GetComponent<EnemyBehavior>() != null)
             {
                 hit.transform.GetComponent<EnemyBehavior>().Knockback(force, transform.position);
+                Debug.Log(hit.collider.tag);
             }
         }
     }
+
+    IEnumerator FireWait()
+    {
+        yield return new WaitForSeconds(fireCooldown);
+        isFireCD = false;
+    }    
+
 }

@@ -7,7 +7,7 @@ public class EnemyBehavior : MonoBehaviour
     [Tooltip("The points that this enemy will travel to")]
     [SerializeField] Transform[] patrolPoints;
 
-    int currentPointIndex;
+    [SerializeField] int currentPointIndex;
 
     [Tooltip("How long between each time this enemy moves")]
     [SerializeField] float waitTimeMove;
@@ -17,48 +17,95 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] float enemySpeed = 5;
     [Tooltip("How much damage does this enemy do")]
     [SerializeField] int enemyDamage = 1;
+    [Tooltip("How far can this enemy see")]
+    [SerializeField] float sightRange = 10f;
+
+    GameObject playerBeingChased;
 
     bool alive = true;
     bool knockback = false;
     Rigidbody rb;
 
+    [Tooltip("This is the game object with the collider used when this enemy attacks")]
+    [SerializeField] GameObject attackCollider;
+
     [Tooltip("This enemies parent object")]
     [SerializeField] GameObject parent;
+
+    [Tooltip("Meant for testing purposes. 1: Patrol, 2: Wait, 3: Knockback, 4: Player Chase, 5: Death")]
+    [SerializeField] int stage;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        stage = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.position != patrolPoints[currentPointIndex].position && alive && !knockback)
+        switch (stage)
+        {
+            case 1: // Patrol
+                PatrolStage();
+                break;
+            case 2: // Patrol Wait
+                CheckForPlayer();
+                break;
+            case 3: // Knockback
+                KBCheck();
+                break;
+            case 4: // Player Chase
+                break;
+            case 5: // Death
+                break;
+            default:
+                break;
+        }
+        //Patrol is started
+        //Need to make a simple rotation to make sure the enemy is facing the patrol point it wants to head towards
+        //Maybe can do this in MoveWait?
+        //Need to create a detection system along with an attack system.
+    }
+
+    private void PatrolStage()
+    {
+        if (transform.position != patrolPoints[currentPointIndex].position)
         {
             transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentPointIndex].position,
                 enemySpeed * Time.deltaTime);
         }
         else
         {
-            if (knockback && alive)
+            mWait = true;
+            stage = 2;
+            StartCoroutine(MoveWait());
+        }
+        CheckForPlayer();
+    }
+
+    private void CheckForPlayer()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(this.transform.position, this.transform.forward, out hit, sightRange))
+        {
+            if(hit.collider.CompareTag("Player"))
             {
-                if (rb.velocity == new Vector3 (0,0,0))
-                {
-                    knockback = false;
-                    mWait = false;
-                }
-            }
-            if (!mWait && alive && !knockback)
-            {
-                mWait = true;
-                StartCoroutine(MoveWait());
+                playerBeingChased = hit.transform.gameObject;
+                stage = 4;
             }
         }
-        //Patrol is started
-        //Need to make a simple rotation to make sure the enemy is facing the patrol point it wants to head towards
-        //Maybe can do this in MoveWait?
-        //Need to create a detection system along with an attack system.
+    }
+
+    private void PlayerChase()
+    {
+        float distance = Vector3.Distance(transform.position, playerBeingChased.transform.position);
+        switch (distance)
+        {
+            default:
+                break;
+        }
     }
 
     IEnumerator MoveWait()
@@ -68,18 +115,30 @@ public class EnemyBehavior : MonoBehaviour
             currentPointIndex++;
         else
             currentPointIndex = 0;
-        mWait = false;
+        stage = 1;
     }
 
     public void Knockback(float force, Vector3 tf)
     {
         StopAllCoroutines();
         knockback = true;
-        Vector3 direction = tf - transform.position;
+        stage = 3;
+        Vector3 direction = transform.position - tf;
         rb.AddForce(direction.normalized * force, ForceMode.Impulse);
+        Debug.Log("Hit");
     }
 
-    private void attack()
+    private void KBCheck()
+    {
+        if (rb.velocity == new Vector3(0, 0, 0))
+        {
+            knockback = false;
+            mWait = false;
+            stage = 1;
+        }
+    }
+
+    private void Attack()
     {
         //This will activate an attack trigger
     }
