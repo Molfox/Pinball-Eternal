@@ -5,8 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] bool cursorLocked = true;
-    [SerializeField] int score;
+    [SerializeField] int score = 0;
     [SerializeField] int combo;
+    [SerializeField] float comboTimer = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -24,8 +25,20 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void changeScore(int addScore)
+    public void ChangeScore(int addScore)
     {
+        if (combo > 1)
+        {
+            StopAllCoroutines();
+        }
+        combo++;
+        score += addScore * combo;
+        StartCoroutine(ComboTimer());
+    }
 
+    IEnumerator ComboTimer()
+    {
+        yield return new WaitForSeconds(comboTimer);
+        combo = 0;
     }
 }
