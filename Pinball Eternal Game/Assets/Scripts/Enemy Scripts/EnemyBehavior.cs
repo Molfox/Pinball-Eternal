@@ -17,6 +17,8 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] float enemySpeed = 5;
     [Tooltip("How much damage does this enemy do")]
     [SerializeField] int enemyDamage = 1;
+    [Tooltip("How long it takes before this enemy can attack again")]
+    [SerializeField] float attackCooldown = 3;
     [Tooltip("How far can this enemy see")]
     [SerializeField] float sightRange = 10f;
     [Tooltip("How far will it try to attack")]
@@ -30,6 +32,7 @@ public class EnemyBehavior : MonoBehaviour
 
     bool alive = true;
     bool knockback = false;
+    bool attackCD = false;
     Rigidbody rb;
 
     [Tooltip("This is the game object with the collider used when this enemy attacks")]
@@ -46,7 +49,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         gm = FindObjectOfType<GameManager>();
-        stage = 1;
+        stage = 5;
     }
 
     // Update is called once per frame
@@ -66,7 +69,8 @@ public class EnemyBehavior : MonoBehaviour
             case 4: // Player Chase
                 PlayerChase();
                 break;
-            case 5: // Death
+            case 5: // Rotate
+                RotateStage();
                 break;
             default:
                 break;
@@ -82,7 +86,7 @@ public class EnemyBehavior : MonoBehaviour
         if (transform.position != patrolPoints[currentPointIndex].position)
         {
             transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentPointIndex].position,
-                enemySpeed * Time.deltaTime);
+                                                        enemySpeed * Time.deltaTime);
         }
         else
         {
@@ -106,6 +110,18 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
+    private void RotateStage()
+    {
+        if (Vector3.Angle(transform.forward, patrolPoints[currentPointIndex].position - transform.position) > .3)
+        {
+            transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, patrolPoints[currentPointIndex].position - transform.position,
+                                                            enemySpeed * Time.deltaTime, 0.0f));
+        }
+        else
+            stage = 1;
+        CheckForPlayer();
+    }
+
     private void PlayerChase()
     {
         float distance = Vector3.Distance(transform.position, playerBeingChased.transform.position);
@@ -114,12 +130,15 @@ public class EnemyBehavior : MonoBehaviour
             Attack();
         } else if (distance > escapeRange)
         {
-            stage = 1;
+            playerBeingChased = null;
+            stage = 5;
         }
         else
         {
             transform.position = Vector3.MoveTowards(transform.position, playerBeingChased.transform.position,
                 enemySpeed * Time.deltaTime);
+            transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, playerBeingChased.transform.position - transform.position,
+                                                            enemySpeed * Time.deltaTime, 0.0f));
         }
     }
 
@@ -130,7 +149,7 @@ public class EnemyBehavior : MonoBehaviour
             currentPointIndex++;
         else
             currentPointIndex = 0;
-        stage = 1;
+        stage = 5;
     }
 
     public void Knockback(float force, Vector3 tf)
@@ -149,13 +168,35 @@ public class EnemyBehavior : MonoBehaviour
         {
             knockback = false;
             mWait = false;
-            stage = 1;
+            attackCD = false;
+            attackCollider.SetActive(false);
+            stage = 5;
         }
     }
 
     private void Attack()
     {
-        Debug.Log("Attack");
+        if (!attackCD)
+        {
+            attackCollider.SetActive(true);
+            attackCD = true;
+            StartCoroutine(AttackWait());
+            StartCoroutine(ColliderFrames());
+        }
+    }
+
+
+    IEnumerator AttackWait()
+    {
+        yield return new WaitForSeconds(attackCooldown);
+        attackCD = false;
+        
+    }
+
+    IEnumerator ColliderFrames()
+    {
+        yield return new WaitForSeconds(1);
+        attackCollider.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
