@@ -37,6 +37,10 @@ public class PlayerShoot : MonoBehaviour
             {
                 hit.transform.GetComponent<EnemyBehavior>().Knockback(force, transform.position);
                 Debug.Log(hit.collider.tag);
+            } 
+            else if (hit.collider.CompareTag("crate") && hit.transform.GetComponent<ExplosiveCrate>() != null)
+            {
+
             }
         }
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     Vector3 direction;
+    Vector3 lastSolidGround;
     CharacterController cc;
 
     [Tooltip("What is being moved?")]
@@ -54,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 direction.y += Mathf.Sqrt(gravityValue * -3f * jumpHeight);
             }
+            lastSolidGround = transform.position;
         } else
         {
             direction.y += gravityValue * Time.deltaTime;
@@ -64,5 +66,10 @@ public class PlayerMovement : MonoBehaviour
         cc.Move(move * Time.deltaTime);
         
 
+    }
+
+    public Vector3 getLastSolidGround()
+    {
+        return lastSolidGround;
     }
 }

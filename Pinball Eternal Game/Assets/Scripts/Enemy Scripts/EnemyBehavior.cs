@@ -7,6 +7,9 @@ public class EnemyBehavior : MonoBehaviour
     [Tooltip("The points that this enemy will travel to")]
     [SerializeField] Transform[] patrolPoints;
 
+    [Tooltip("The point that this enemy will respawn at")]
+    [SerializeField] Transform respawnPoint;
+
     [SerializeField] int currentPointIndex;
 
     [Tooltip("How long between each time this enemy moves")]
@@ -25,6 +28,10 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] float attackRange = 1f;
     [Tooltip("How far the player needs to be to escape aggro")]
     [SerializeField] float escapeRange = 15f;
+    [Tooltip("How many points is this enemy worth?")]
+    [SerializeField] int pointsWorth = 200;
+    [Tooltip("How long does it take for this enemy to respawn")]
+    [SerializeField] float respawnTime = 20f;
 
     GameObject playerBeingChased;
 
@@ -41,7 +48,7 @@ public class EnemyBehavior : MonoBehaviour
     [Tooltip("This enemies parent object")]
     [SerializeField] GameObject parent;
 
-    [Tooltip("Meant for testing purposes. 1: Patrol, 2: Wait, 3: Knockback, 4: Player Chase, 5: Death")]
+    [Tooltip("Meant for testing purposes. 1: Patrol, 2: Wait, 3: Knockback, 4: Player Chase, 5: Rotating, 6: Dead")]
     [SerializeField] int stage;
 
     // Start is called before the first frame update
@@ -71,6 +78,8 @@ public class EnemyBehavior : MonoBehaviour
                 break;
             case 5: // Rotate
                 RotateStage();
+                break;
+            case 6: // Purgatory
                 break;
             default:
                 break;
@@ -128,7 +137,8 @@ public class EnemyBehavior : MonoBehaviour
         if (distance < attackRange)
         {
             Attack();
-        } else if (distance > escapeRange)
+        } 
+        else if (distance > escapeRange)
         {
             playerBeingChased = null;
             stage = 5;
@@ -185,6 +195,30 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
+    private void Death()
+    {
+        if (alive)
+        {
+            alive = false;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gm.ChangeScore(pointsWorth);
+            StartCoroutine(Respawning());
+            stage = 6;
+        }
+
+    }
+
+    IEnumerator Respawning()
+    {
+        yield return new WaitForSeconds(respawnTime);
+        transform.position = respawnPoint.position;
+        gameObject.GetComponent<BoxCollider>().enabled = true;
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        alive = true;
+        stage = 5;
+    }
+
 
     IEnumerator AttackWait()
     {
@@ -203,9 +237,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (other.CompareTag("killBox") || other.CompareTag("deathFloor") || (other.CompareTag("enemy") && knockback))
         {
-            alive = false;
-            gameObject.GetComponent<BoxCollider>().enabled = false;
-            Destroy(parent);
+            Death();
         }
     }
 }
