@@ -5,26 +5,36 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    [Tooltip("Do you want the cursor to be locked and invisible while the game is playing?")]
     [SerializeField] bool cursorLocked = true;
+    [Tooltip("Is the timer for the game on?")]
     [SerializeField] bool timerOn = true;
+    [Tooltip("How much time the players have")]
     [SerializeField] float timer = 100f;
+    [Tooltip("What is the player's current score")]
     [SerializeField] int score = 0;
+    [Tooltip("What is the player's current combo")]
     [SerializeField] int combo;
+    [Tooltip("How long should the combo meter last")]
     [SerializeField] float comboTimer = 5f;
 
+    [Tooltip("The gameobject that houses the TMP for the score")]
     [SerializeField] GameObject scoreText;
+    [Tooltip("The gameobject that houses the TMP for the combo")]
     [SerializeField] GameObject comboText;
+    [Tooltip("The gameobject that houses the TMP for the timer")]
     [SerializeField] GameObject timerText;
 
     // Start is called before the first frame update
     void Start()
     {
+        //If cursorLocked is true, then lock the cursor to center of screen and make it invisible.
         if (cursorLocked)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-        comboText.SetActive(false);
+        comboText.SetActive(false); //Make sure that comboText isn't visible when the game starts
     }
 
     // Update is called once per frame
@@ -33,6 +43,9 @@ public class GameManager : MonoBehaviour
         TimerManager();
     }
 
+    /// <summary>
+    /// This method keeps track of the timer in the game.
+    /// </summary>
     private void TimerManager()
     {
         if (timerOn)
