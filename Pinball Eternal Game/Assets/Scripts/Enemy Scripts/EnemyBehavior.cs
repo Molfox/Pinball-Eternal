@@ -229,7 +229,7 @@ public class EnemyBehavior : MonoBehaviour
         if (!attackCD)
         {
             attackCollider.SetActive(true); 
-            //An Play.Animator script will likely fit here
+            //An Animator.play script will likely fit here
             attackCD = true;
             StartCoroutine(AttackWait());
             StartCoroutine(ColliderFrames());

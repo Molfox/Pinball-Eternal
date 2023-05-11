@@ -13,8 +13,12 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     bool isFireCD = false;
+
+    [Tooltip("How long between each time this can fire")]
     [SerializeField] float fireCooldown = 1f;
+    [Tooltip("How far is the range")]
     [SerializeField] float range = 5f;
+    [Tooltip("How much force does this apply")]
     [SerializeField] float force = 1000f;
 
     // Start is called before the first frame update
@@ -35,6 +39,10 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Use a raycast to check to see if an object within range is an enemy or crate object. 
+    /// This then pulls from that objects respective script to call upon it's Knockback method.
+    /// </summary>
     void Fire()
     {
         RaycastHit hit;
@@ -53,6 +61,10 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Wait for so many seconds before being able to use Fire again.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator FireWait()
     {
         yield return new WaitForSeconds(fireCooldown);
