@@ -1,3 +1,11 @@
+/***
+ * PlayerShoot.cs
+ * By Nathan Boles
+ * 
+ * When the player presses the fire button, then this shoots. If it hits a shootable object, it pushes that object 
+ * back with a set amount of force. 
+ * 
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +30,7 @@ public class PlayerShoot : MonoBehaviour
         {
 
             Fire();
-            isFireCD = true;
+            isFireCD = true; //You can't shoot one shot per frame
             StartCoroutine(FireWait());
         }
     }
@@ -40,7 +48,7 @@ public class PlayerShoot : MonoBehaviour
             } 
             else if (hit.collider.CompareTag("crate") && hit.transform.GetComponent<ExplosiveCrate>() != null)
             {
-
+                hit.transform.GetComponent<ExplosiveCrate>().Knockback(force, transform.position);
             }
         }
     }

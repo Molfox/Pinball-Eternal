@@ -1,3 +1,13 @@
+/***
+ * PlayerManager.cs
+ * By Nathan Boles
+ * 
+ * This script keeps track fo the basic functionalitiy of the player character.
+ * This includes keeping track of player health, iFrames, and what happens if the player falls off
+ * somewhere. 
+ * 
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,14 +17,17 @@ using TMPro;
 
 public class PlayerManager : MonoBehaviour
 {
+    [Tooltip("How much health does the player have")]
     [SerializeField] int health;
+    [Tooltip("How long is the player untouchable after being hit")]
     [SerializeField] float iFramesTime = 2f;
 
     bool iFrames = false;
 
     PlayerMovement pmReference;
 
-    [SerializeField] Image[] healthUI;
+    [Tooltip("Images used for player health")]
+    [SerializeField] Image[] healthUI; //Might change this from a serialize field into something that is set via script
     
 
     //Create a code that keeps track of health and watches to see if
@@ -33,6 +46,12 @@ public class PlayerManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// When this object enters another trigger, it'll check to see if it's an enemy attack or killBox
+    /// If it is, TakeDamage is called, if not, check to see if it is a death floor. If it is, teleport the player
+    /// to the last safe spot, and TakeDamage afterwards. 
+    /// </summary>
+    /// <param name="other">Trigger Collider this object entered</param>
     private void OnTriggerEnter(Collider other)
     {
         if (!iFrames && (other.CompareTag("enemyAttack") || other.CompareTag("killBox")))
@@ -46,6 +65,12 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// When called, this method will subtract from the player's health. To do this, it'll turn on iFrames
+    /// so that multiple hits won't happen at once, then it'll use a for loop to reduce health and the image 
+    /// via how much damage happens.
+    /// </summary>
+    /// <param name="damage">The amount of damage happening to the character</param>
     private void TakeDamage(int damage)
     {
         iFrames = true;
@@ -63,6 +88,10 @@ public class PlayerManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// This IEnumerator basically waits for however long iFrames last after being called, then turns it off. 
+    /// </summary>
+    /// <returns></returns>
     IEnumerator iFrameWait()
     {
         yield return new WaitForSeconds(iFramesTime);

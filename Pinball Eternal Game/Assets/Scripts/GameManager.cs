@@ -1,3 +1,11 @@
+/***
+ * GameManger.cs
+ * By Nathan Boles
+ * 
+ * This script manages all the basic functionalities of the game. 
+ * Including things like the score and timer. 
+ * 
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,6 +53,9 @@ public class GameManager : MonoBehaviour
 
     /// <summary>
     /// This method keeps track of the timer in the game.
+    /// If the timer is active, then it will appear on the canvas screen. Each frame, it will subtract that amount
+    /// of time from variable timer, then display that as an int on the timer on screen.
+    /// When the timer runs out, the Game End screen will show to give the player their highscore this playthrough.
     /// </summary>
     private void TimerManager()
     {
@@ -65,12 +76,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// This method adds to score when it is called upon.
+    /// This script first adds a bonus to a combo, and if that combo is greater then 2, it'll appear on the screen.
+    /// Then it uses that combo, multiplying it by addscore, to add that number to the players current score and
+    /// making it appear on screen. Afterwards it starts a coroutine which tracks the combo timer.
+    /// </summary>
+    /// <param name="addScore">The initial score to be added when this is called</param>
     public void ChangeScore(int addScore)
     {
         combo++;
         if (combo > 1)
         {
-            StopAllCoroutines();
+            StopAllCoroutines(); //It'll be reset later in the script
             comboText.SetActive(true);
             comboText.GetComponent<TextMeshPro>().text = "X" + combo.ToString();
         }
@@ -79,6 +98,10 @@ public class GameManager : MonoBehaviour
         StartCoroutine(ComboTimer());
     }
 
+    /// <summary>
+    /// This IEnumerator will wait however long the comboTimer is and then resets combo.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator ComboTimer()
     {
         yield return new WaitForSeconds(comboTimer);
