@@ -1,0 +1,237 @@
+fileFormatVersion: 2
+guid: 45c5f56fa2430a14eb2dd1657f4ca61b
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      74: -395274406489674622
+    second: Cylinder.006|BeltSpin
+  - first:
+      74: 8949063359273169408
+    second: Cylinder.006|Gears Turning
+  - first:
+      74: 6306650121560103224
+    second: Cylinder.006|Gears Turning Opposite
+  - first:
+      74: -2579325081591093279
+    second: Cylinder.006|Gears Turning Opposite.001
+  - first:
+      74: 6930638317068289028
+    second: Cylinder.006|Gears Turning.001
+  - first:
+      74: 4832752272772816836
+    second: Cylinder.008|BeltSpin
+  - first:
+      74: 6770098857837376008
+    second: Cylinder.008|Gears Turning
+  - first:
+      74: -3201701783492394912
+    second: Cylinder.008|Gears Turning Opposite
+  - first:
+      74: -3965771197303769967
+    second: Cylinder.008|Gears Turning Opposite.001
+  - first:
+      74: -4849004097959194443
+    second: Cylinder.008|Gears Turning.001
+  - first:
+      74: -1580461590855583845
+    second: Cylinder.009|BeltSpin
+  - first:
+      74: 1444187550719545507
+    second: Cylinder.009|Gears Turning
+  - first:
+      74: 6171446909090808105
+    second: Cylinder.009|Gears Turning Opposite
+  - first:
+      74: 4759030127768608772
+    second: Cylinder.009|Gears Turning Opposite.001
+  - first:
+      74: -8917936935435583566
+    second: Cylinder.009|Gears Turning.001
+  - first:
+      74: 1685459649491621545
+    second: Cylinder.010|BeltSpin
+  - first:
+      74: -4174765878109240263
+    second: Cylinder.010|Gears Turning
+  - first:
+      74: 6449711246705715447
+    second: Cylinder.010|Gears Turning Opposite
+  - first:
+      74: -2564597263642381785
+    second: Cylinder.010|Gears Turning Opposite.001
+  - first:
+      74: 6858581765337051440
+    second: Cylinder.010|Gears Turning.001
+  - first:
+      74: -7205526417602868279
+    second: Cylinder.011|BeltSpin
+  - first:
+      74: -2616574695770233808
+    second: Cylinder.011|Gears Turning
+  - first:
+      74: -8337754654081616630
+    second: Cylinder.011|Gears Turning Opposite
+  - first:
+      74: -8674438520884411521
+    second: Cylinder.011|Gears Turning Opposite.001
+  - first:
+      74: -8369906953168930075
+    second: Cylinder.011|Gears Turning.001
+  - first:
+      74: -7885841856792379172
+    second: Cylinder.012|BeltSpin
+  - first:
+      74: -6633306753868911916
+    second: Cylinder.012|Gears Turning
+  - first:
+      74: 5710495858354676476
+    second: Cylinder.012|Gears Turning Opposite
+  - first:
+      74: 165282189783319946
+    second: Cylinder.012|Gears Turning Opposite.001
+  - first:
+      74: -7253233718588239004
+    second: Cylinder.012|Gears Turning.001
+  - first:
+      74: 6124074357554728939
+    second: Cylinder.013|BeltSpin
+  - first:
+      74: 2127816590753914352
+    second: Cylinder.013|Gears Turning
+  - first:
+      74: 2235239196373831845
+    second: Cylinder.013|Gears Turning Opposite
+  - first:
+      74: 7130846859581934169
+    second: Cylinder.013|Gears Turning Opposite.001
+  - first:
+      74: -3539123498387489105
+    second: Cylinder.013|Gears Turning.001
+  - first:
+      74: 3217480807804267032
+    second: Cylinder.014|BeltSpin
+  - first:
+      74: -203564079623865606
+    second: Cylinder.014|Gears Turning
+  - first:
+      74: -2234470247146934187
+    second: Cylinder.014|Gears Turning Opposite
+  - first:
+      74: -2017070435178383647
+    second: Cylinder.014|Gears Turning Opposite.001
+  - first:
+      74: 6754224064801511184
+    second: Cylinder.014|Gears Turning.001
+  - first:
+      74: -922053711654131716
+    second: Cube.004|BeltSpin
+  - first:
+      74: 2071795091259510188
+    second: Cube.004|Gears Turning
+  - first:
+      74: -1798452487248403280
+    second: Cube.004|Gears Turning Opposite
+  - first:
+      74: -1971132230750716859
+    second: Cube.004|Gears Turning Opposite.001
+  - first:
+      74: -7268796045049179592
+    second: Cube.004|Gears Turning.001
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
