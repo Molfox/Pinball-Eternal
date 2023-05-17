@@ -314,8 +314,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCameraLink: {fileID: 7131297602316727881}
   playerBodyLink: {fileID: 3079350117787447230}
-  xSensitivity: 100
-  ySensitivity: 100
+  xSensitivity: 30
+  ySensitivity: 30
 --- !u!114 &7131297602316727883
 MonoBehaviour:
   m_ObjectHideFlags: 0
