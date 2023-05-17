@@ -131,13 +131,17 @@ MonoBehaviour:
   - {fileID: 3630122518353314299}
   - {fileID: 3630122516672489631}
   - {fileID: 3630122518317941136}
+  respawnPoint: {fileID: 0}
   currentPointIndex: 0
   waitTimeMove: 1
   enemySpeed: 5
   enemyDamage: 1
+  attackCooldown: 3
   sightRange: 10
   attackRange: 1
   escapeRange: 15
+  pointsWorth: 200
+  respawnTime: 20
   attackCollider: {fileID: 3630122517321288948}
   parent: {fileID: 3630122518286861682}
   stage: 0
@@ -185,7 +189,7 @@ GameObject:
   - component: {fileID: 3630122517321288950}
   m_Layer: 0
   m_Name: Attack Collider
-  m_TagString: Untagged
+  m_TagString: enemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -28,10 +28,12 @@ public class PlayerRotate : MonoBehaviour
         Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X") * xSensitivity,
                                         Input.GetAxisRaw("Mouse Y") * ySensitivity);
 
+        yRotate += mouseDelta.x;
         xRotate -= mouseDelta.y;
         xRotate = Mathf.Clamp(xRotate, -90.0f, 90.0f);
 
-        transform.localRotation = Quaternion.Euler(xRotate, 0, 0);
+        transform.localRotation = Quaternion.Euler(xRotate, yRotate, 0);
         playerBodyLink.Rotate(Vector3.up * mouseDelta.x);
+        transform.localPosition = playerBodyLink.localPosition;
     }
 }

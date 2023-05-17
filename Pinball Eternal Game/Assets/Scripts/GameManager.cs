@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
             if (timer > 0)
             {
                 timer -= Time.deltaTime;
-                timerText.GetComponent<TextMeshPro>().text = Mathf.FloorToInt(timer).ToString();
+                timerText.GetComponent<TextMeshProUGUI>().text = Mathf.FloorToInt(timer).ToString();
             } 
             else
             {
@@ -91,10 +91,10 @@ public class GameManager : MonoBehaviour
         {
             StopAllCoroutines(); //It'll be reset later in the script
             comboText.SetActive(true);
-            comboText.GetComponent<TextMeshPro>().text = "X" + combo.ToString();
+            comboText.GetComponent<TextMeshProUGUI>().text = "X" + combo.ToString();
         }
         score += addScore * combo;
-        scoreText.GetComponent<TextMeshPro>().text = score.ToString();
+        scoreText.GetComponent<TextMeshProUGUI>().text = score.ToString();
         StartCoroutine(ComboTimer());
     }
 
