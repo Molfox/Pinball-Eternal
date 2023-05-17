@@ -315,7 +315,8 @@ public class EnemyBehavior : MonoBehaviour
     /// <summary>
     /// Returns the objects knockback variable when called
     /// </summary>
-    public getKnockback()
+    /// <returns>knockback</returns>
+    public bool getKnockback()
     {
         return knockback;
     }
