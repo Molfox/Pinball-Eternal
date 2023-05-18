@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3737603676138166933}
-  - component: {fileID: 9158512202279669959}
   m_Layer: 0
   m_Name: CombinedScaffolding PlatformImproved
   m_TagString: Untagged
@@ -36,22 +35,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &9158512202279669959
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1769852053980276710}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
---- !u!64 &9178673834926805161
-MeshCollider:
+--- !u!65 &4767784707963601144
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -60,10 +45,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1550514412580984892, guid: 31c069b9faa503349823b98dcacbd427, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 2, y: 1.7424008, z: 1.9999998}
+  m_Center: {x: 0, y: -0.12879954, z: 0.0000004878174}
 --- !u!1001 &640086111296089928
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ public class EnemyBehavior : MonoBehaviour
     [Tooltip("The point that this enemy will respawn at")]
     [SerializeField] Transform respawnPoint;
 
-    [SerializeField] int currentPointIndex;
+    [SerializeField] int currentPointIndex = 1;
 
     [Tooltip("How long between each time this enemy moves")]
     [SerializeField] float waitTimeMove;
