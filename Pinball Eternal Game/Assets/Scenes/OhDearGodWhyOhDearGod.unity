@@ -8569,7 +8569,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7131297602316727883, guid: b1394ca82c5f4254ea82c098c5238751, type: 3}
       propertyPath: force
-      value: 10
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131297602316727883, guid: b1394ca82c5f4254ea82c098c5238751, type: 3}
+      propertyPath: range
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8623893025181516575, guid: b1394ca82c5f4254ea82c098c5238751, type: 3}
       propertyPath: healthUI.Array.data[0]
