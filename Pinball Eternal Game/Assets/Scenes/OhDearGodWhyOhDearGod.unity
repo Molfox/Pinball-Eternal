@@ -13195,7 +13195,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3630122516446829868, guid: 6af0bbc02dfce66489af1e3e57fad4eb, type: 3}
       propertyPath: m_UseGravity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3630122516446829868, guid: 6af0bbc02dfce66489af1e3e57fad4eb, type: 3}
       propertyPath: m_Constraints
@@ -13203,7 +13203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3630122516446829869, guid: 6af0bbc02dfce66489af1e3e57fad4eb, type: 3}
       propertyPath: enemySpeed
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3630122516446829869, guid: 6af0bbc02dfce66489af1e3e57fad4eb, type: 3}
       propertyPath: currentPointIndex
