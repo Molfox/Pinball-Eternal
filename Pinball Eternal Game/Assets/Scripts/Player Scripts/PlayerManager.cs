@@ -40,7 +40,7 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         cc = GetComponent<CharacterController>();
-        gm = GetComponent<GameManager>();
+        gm = FindObjectOfType<GameManager>();
         pmReference = GetComponent<PlayerMovement>();
     }
 
