@@ -125,5 +125,7 @@ public class GameManager : MonoBehaviour
         statusScreen.SetActive(false);
         gameOverScreen.SetActive(true);
         Time.timeScale = 0;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
