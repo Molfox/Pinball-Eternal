@@ -33,6 +33,15 @@ public class GameManager : MonoBehaviour
     [Tooltip("The gameobject that houses the TMP for the timer")]
     [SerializeField] GameObject timerText;
 
+    [Tooltip("The gameobject that houses the TMP for the score on the game over screen")]
+    [SerializeField] GameObject goScoreText;
+
+    [Tooltip("The Status Screen")]
+    [SerializeField] GameObject statusScreen;
+    [Tooltip("The Game Over Screen")]
+    [SerializeField] GameObject gameOverScreen;
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +52,7 @@ public class GameManager : MonoBehaviour
             Cursor.visible = false;
         }
         comboText.SetActive(false); //Make sure that comboText isn't visible when the game starts
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -69,6 +79,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 timer = 0;
+                GameEnd();
                 //Build a proper Game End Screen
                 Debug.Log("Game End");
                 Debug.Log("Score: " + score);
@@ -107,5 +118,12 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(comboTimer);
         comboText.SetActive(false);
         combo = 0;
+    }
+
+    public void GameEnd()
+    {
+        statusScreen.SetActive(false);
+        gameOverScreen.SetActive(true);
+        Time.timeScale = 0;
     }
 }

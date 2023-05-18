@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     Vector3 direction;
+    [SerializeField]
     Vector3 lastSolidGround;
     CharacterController cc;
 
@@ -70,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector3 getLastSolidGround()
     {
+        Debug.Log("Last Solid Ground Gotten");
         return lastSolidGround;
     }
 }

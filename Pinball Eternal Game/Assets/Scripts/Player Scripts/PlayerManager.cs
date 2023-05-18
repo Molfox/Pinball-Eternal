@@ -25,6 +25,8 @@ public class PlayerManager : MonoBehaviour
     bool iFrames = false;
 
     PlayerMovement pmReference;
+    CharacterController cc;
+    GameManager gm;
 
     [Tooltip("Images used for player health")]
     [SerializeField] Image[] healthUI; //Might change this from a serialize field into something that is set via script
@@ -37,6 +39,8 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cc = GetComponent<CharacterController>();
+        gm = GetComponent<GameManager>();
         pmReference = GetComponent<PlayerMovement>();
     }
 
@@ -60,7 +64,9 @@ public class PlayerManager : MonoBehaviour
         }
         else if(other.CompareTag("deathFloor"))
         {
+            cc.enabled = false;
             transform.position = pmReference.getLastSolidGround();
+            cc.enabled = true;
             TakeDamage(1);
         }
     }
@@ -82,7 +88,7 @@ public class PlayerManager : MonoBehaviour
             if (health == 0)
             {
                 i = damage;
-                //GameOver;
+                gm.GameEnd();
             }
         }
         
