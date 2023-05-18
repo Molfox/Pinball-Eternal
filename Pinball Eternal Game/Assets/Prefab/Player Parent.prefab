@@ -329,5 +329,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireCooldown: 1
-  range: 20
-  force: 50
+  range: 25
+  force: 20
