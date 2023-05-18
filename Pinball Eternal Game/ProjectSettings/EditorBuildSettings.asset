@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/OhDearGodWhyOhDearGod.unity
+    guid: 8888c4253a505244f95ef7458a49c615
   m_configObjects: {}
